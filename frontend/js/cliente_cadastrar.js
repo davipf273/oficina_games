@@ -1,4 +1,4 @@
-const btn_cadastrar = document.getElementById('btn_cadastrar') // dar uma olhada para ver se esta certo
+const btn_cadastrar = document.getElementById('btn_cadastrar')
 const resposta = document.getElementById('resposta')
 
 btn_cadastrar.addEventListener('click', (e) => {
@@ -9,7 +9,7 @@ btn_cadastrar.addEventListener('click', (e) => {
         email: document.getElementById('email').value,
         senha: document.getElementById('senha').value,
         cpf: document.getElementById('cpf').value,
-        endereco: document.getElementById('endereco').value
+        telefone: document.getElementById('telefone').value
     }
 
     fetch('http://localhost:3000/cliente', {

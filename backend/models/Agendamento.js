@@ -15,24 +15,22 @@ const Agendamento = db.define('agendamento', {
         type: DataTypes.TIME,
         allowNull: false
     },
-    idCliente: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references:{
-            model:'clientes',
-            key: 'codCliente'
-        }
-    },
     idConsole: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model:'consoles',
-            key: 'codConsole'
+            key: 'codConsole',
+            model: 'consoles'
         }
     },
-
-    
+    idCliente: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references:{
+            key: 'codCliente',
+            model: 'clientes'
+        }
+    },
 }, {
     timestamps: false,
     tableName: 'agendamentos'

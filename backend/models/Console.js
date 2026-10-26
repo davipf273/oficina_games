@@ -8,30 +8,29 @@ const Console = db.define('console', {
         autoIncrement: true
     },
     modelo: {
-        type: DataTypes.STRING(100), // mudado a quantidade para funcionar a criptografia 
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     marca: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    numSerie: {
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    numeroSerie: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    tipoServico: {
-        type: DataTypes.STRING(100),
+    tipo: {
+        type: DataTypes.STRING(30),
         allowNull: false
     },
     idCliente: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
-            model:'clientes',
-            key: 'codCliente'
+            key: 'codCliente',
+            model: 'clientes'
         }
     },
-
 }, {
     timestamps: false,
     tableName: 'consoles'

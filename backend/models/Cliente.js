@@ -8,11 +8,11 @@ const Cliente = db.define('cliente', {
         autoIncrement: true
     },
     nome: {
-        type: DataTypes.STRING(100), // mudado a quantidade para funcionar a criptografia 
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     email: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(75),
         allowNull: false
     },
     senha: {
@@ -24,7 +24,7 @@ const Cliente = db.define('cliente', {
         allowNull: false
     },
     telefone: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(11),
         allowNull: false
     }
 }, {

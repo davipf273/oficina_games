@@ -1,37 +1,50 @@
-const resposta = document.getElementById('resposta') // dar uma olhada para ver se esta certo
-const btn_listar = document.getElementById('btn_listar')
+const token = localStorage.getItem('token')
+
+// Proteção da rota privada: se não tem token, redireciona para a Home
+if (!token) {
+    location.href = '../index.html'
+}
+
+let resposta = document.getElementById('resposta')
+let btn_listar = document.getElementById('btn_listar')
 
 btn_listar.addEventListener('click', (e) => {
     e.preventDefault()
 
     fetch('http://localhost:3000/clientes', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
     })
     .then(res => res.json())
-    .then(dados => {
-        resposta.innerHTML = `
+        .then(dados => {
+            console.log(dados)
+            resposta.innerHTML = ''
+            resposta.innerHTML += `
             <table>
                 ${criarThead()}
                 ${criarTbody(dados)}
             </table>
         `
-    })
-    .catch((err) => {
-        console.error('Erro ao listar os dados:', err)
-        resposta.innerHTML = '<p>Erro ao conectar com o servidor.</p>'
-    })
+        })
+        .catch((err) => {
+            console.error('Erro ao listar os dados', err)
+            resposta.innerHTML = '<p>Erro ao conectar com o servidor.</p>'
+        })
 })
 
 function criarTbody(dados) {
     let corpo = '<tbody>'
     dados.forEach(el => {
         corpo += `<tr>`
-        corpo += `<td>${el.codCliente || el.id}</td>`
+        corpo += `<td>${el.codCiclista || el.id}</td>`
         corpo += `<td>${el.nome}</td>`
         corpo += `<td>${el.email}</td>`
+        corpo += `<td>${el.senha}</td>`
         corpo += `<td>${el.cpf}</td>`
-        corpo += `<td>${el.endereco}</td>`
+        corpo += `<td>${el.telefone}</td>`
         corpo += `</tr>`
     })
     corpo += `</tbody>`
@@ -44,9 +57,10 @@ function criarThead() {
             <tr>
                 <th>Código</th>
                 <th>Nome</th>
-                <th>E-mail</th>
+                <th>Email</th>
+                <th>senha</th>
                 <th>CPF</th>
-                <th>Endereço</th>
+                <th>telefone</th>
             </tr>
         </thead>
     `

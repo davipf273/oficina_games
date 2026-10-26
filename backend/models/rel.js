@@ -1,7 +1,7 @@
-// criado para poder fazer o relacionamento das tabelas
-const Cliente = require('./Cliente')
-const Console = require('./Console')
-const Agendamento = require('./Agendamento')
+const Agendamento = require("./Agendamento")
+const Cliente = require("./Cliente")
+const Console = require("./Console")
+
 
 Cliente.hasMany(Console,{
     foreignKey: 'idCliente',
@@ -10,8 +10,20 @@ Cliente.hasMany(Console,{
 })
 
 Console.belongsTo(Cliente,{
-    foreignKey:'idCliente',
+    foreignKey: 'idCliente',
     as: 'clienteConsole',
+    allowNull: false
+})
+
+Cliente.hasMany(Agendamento,{
+    foreignKey: 'idCliente',
+    as: 'agendamentoCliente',
+    onDelete: 'CASCADE'
+})
+
+Agendamento.belongsTo(Cliente,{
+    foreignKey: 'idCliente',
+    as: 'clienteAgendamento',
     allowNull: false
 })
 
@@ -27,16 +39,4 @@ Agendamento.belongsTo(Console,{
     allowNull: false
 })
 
-Cliente.hasMany(Agendamento,{
-    foreignKey: 'idCliente',
-    as: 'agendamentoCliente',
-    onDelete: 'CASCADE'
-})
-
-Agendamento.belongsTo(Cliente,{
-    foreignKey:'idCliente',
-    as:'clienteAgendamento',
-    allowNull:false
-})
-
-module.exports = { Cliente, Console, Agendamento}
+module.exports = { Cliente, Agendamento, Console }
